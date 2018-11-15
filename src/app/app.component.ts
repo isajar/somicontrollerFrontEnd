@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { StampsService } from './services/stamps.service';
 
 
 @Component({
@@ -6,6 +7,11 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'app';
+export class AppComponent implements OnInit {
+
+  constructor(private _stampService: StampsService) { }
+
+  ngOnInit() {
+  }
+
 }
