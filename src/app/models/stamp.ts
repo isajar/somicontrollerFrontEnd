@@ -5,3 +5,8 @@ export interface Stamp {
   month: number;
   time: Date;
 }
+
+export interface StampExt extends Stamp {
+  date: string;
+  timeString: string;
+}
