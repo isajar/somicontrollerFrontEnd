@@ -3,18 +3,17 @@
         <b>Isajar Spector, Noviembre de 2018</b>
     </mat-card>
     <mat-table [dataSource]="dataSource">
-        <ng-container matColumnDef="month">
-            <mat-header-cell *matHeaderCellDef> Fecha </mat-header-cell>
-            <mat-cell *matCellDef="let stamp"> {{stamp.date}}</mat-cell>
+
+        <ng-container matColumnDef="workIn">
+            <mat-header-cell *matHeaderCellDef> Entrada </mat-header-cell>
+            <mat-cell *matCellDef="let stamp"> {{stamp.workIn | date:'shortTime'}} </mat-cell>
         </ng-container>
-        <ng-container matColumnDef="time">
-            <mat-header-cell *matHeaderCellDef> Time </mat-header-cell>
-            <mat-cell *matCellDef="let stamp"> {{stamp.timeString}} </mat-cell>
+
+        <ng-container matColumnDef="workOut">
+            <mat-header-cell *matHeaderCellDef> Salida </mat-header-cell>
+            <mat-cell *matCellDef="let stamp"> {{stamp.workOut | date:'shortTime'}} </mat-cell>
         </ng-container>
-        <ng-container matColumnDef="subtotal">
-            <mat-header-cell *matHeaderCellDef> Subtotal </mat-header-cell>
-            <mat-cell *matCellDef="let stamp; let i = index"> <span *ngIf='i%2!=0'>123</span> </mat-cell>
-        </ng-container>
+
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row #rowRef *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>

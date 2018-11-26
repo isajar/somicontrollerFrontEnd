@@ -8,12 +8,27 @@ import { AppComponent } from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 
 // ANGULAR MATERIAL
+import {MatIconModule} from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatButtonModule} from '@angular/material/button'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { MatCardModule, MatButtonModule, MatTableModule } from "@angular/material";
+import { MatCardModule,
+  MatTableModule,
+  MatSidenavModule,
+  MatListModule,
+  MatToolbarModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatDialogModule,
+  } from "@angular/material";
+
 
 // COMPONENTS
 import { HomeComponent } from './home/home.component';
 import { StampComponent } from './stamp/stamp.component';
+import { FormsModule } from '@angular/forms';
+import { StampDialogComponent } from './stamp-dialog/stamp-dialog.component';
+
 
 
 
@@ -21,7 +36,8 @@ import { StampComponent } from './stamp/stamp.component';
   declarations: [
     AppComponent,
     HomeComponent,
-    StampComponent
+    StampComponent,
+    StampDialogComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -30,9 +46,19 @@ import { StampComponent } from './stamp/stamp.component';
     MatCardModule,
     MatButtonModule,
     MatTableModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSidenavModule,
+    MatListModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatDialogModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [StampDialogComponent]
 })
 export class AppModule { }

@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Stamp, StampExt } from '../models/stamp';
+import { Stamp } from '../models/stamp';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -15,15 +14,8 @@ export class StampsService {
 
   }
 
-  getAllStamps(): Observable<StampExt[]> {
-    return this.http.get<Stamp[]>('http://localhost:3000/api/stamps').pipe(
-      map( stamps => stamps.map( stamp => {
-        const time = new Date(stamp.time);
-        const date = time.toLocaleDateString();
-        const timeString = time.toLocaleTimeString();
-        return {...stamp, date, timeString};
-    }))
-    );
+  getAllStamps(): Observable<Stamp[]> {
+    return this.http.get<Stamp[]>('http://localhost:3000/api/stamps');
   }
 
 

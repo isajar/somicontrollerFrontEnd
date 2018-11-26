@@ -7,6 +7,11 @@ import { StampComponent } from "./stamp/stamp.component";
 const routes: Routes = [
     {
         path: "",
+        component: HomeComponent
+
+    },
+    {
+        path: "stamps",
         component: StampComponent
 
     },

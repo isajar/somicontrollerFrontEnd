@@ -3,7 +3,8 @@ export interface Stamp {
   id: string;
   employeeId: string;
   month: number;
-  time: Date;
+  workIn: Date;
+  workOut: Date;
 }
 
 export interface StampExt extends Stamp {
