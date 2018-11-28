@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StampsService } from './services/stamps.service';
+import { EmployeesService } from './services/employees.service';
 
 
 @Component({
@@ -9,9 +10,12 @@ import { StampsService } from './services/stamps.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private _stampService: StampsService) { }
+  constructor(private stampService: StampsService,
+              private employeeService: EmployeesService) { }
 
   ngOnInit() {
+    this.employeeService.init();
+    this.stampService.init();
   }
 
 }

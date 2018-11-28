@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { StampDialogComponent } from '../stamp-dialog/stamp-dialog.component';
+import { Observable } from 'rxjs';
+import { Stamp } from '../models/stamp';
+import { StampsService } from '../services/stamps.service';
+import { DataSource } from '@angular/cdk/collections';
+import { Employee } from '../models/employee';
+import { EmployeesService } from '../services/employees.service';
 
 @Component({
   selector: 'app-home',
@@ -9,21 +15,36 @@ import { StampDialogComponent } from '../stamp-dialog/stamp-dialog.component';
 })
 export class HomeComponent implements OnInit {
 
-  dni: string = '';
+  dataSource = new StampDataSource(this.stampService);
+  displayedColumns = ['employee', 'workIn', 'workOut'];
+  employee$: Observable<Employee>;
 
-  constructor(public dialog: MatDialog) {
+
+  constructor(public dialog: MatDialog,
+              private stampService: StampsService,
+              private employeeService: EmployeesService) {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(StampDialogComponent, {
-      width: '250px',
-      data: this.dni
-    });
+    const dialogRef = this.dialog.open(StampDialogComponent);
   }
 
   ngOnInit() {
+  }
 
+  employee(id: string) {
+   return this.employeeService.findById(id);
   }
 
 
+}
+
+export class StampDataSource extends DataSource<any> {
+  constructor(private stampService: StampsService) {
+    super();
+  }
+  connect(): Observable<Stamp[]> {
+    return this.stampService.stamps$;
+  }
+  disconnect() {}
 }

@@ -32,7 +32,7 @@ export class StampDataSource extends DataSource<any> {
     super();
   }
   connect(): Observable<Stamp[]> {
-    return this.stampService.getAllStamps();
+    return this.stampService.stamps$;
   }
   disconnect() {}
 }

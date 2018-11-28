@@ -1,10 +1,10 @@
 
 export interface Stamp {
-  id: string;
+  _id?: string;
   employeeId: string;
   month: number;
   workIn: Date;
-  workOut: Date;
+  workOut?: Date;
 }
 
 export interface StampExt extends Stamp {

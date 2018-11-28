@@ -1,4 +1,25 @@
-<mat-form-field>
-    <input type="number" matInput placeholder="Input" [(ngModel)]="dni">
-</mat-form-field>
-<button mat-raised-button (click)=openDialog()>Pick one</button>
+<div class="bottom-right">
+    <button mat-fab (click)=openDialog()>+</button>
+</div>
+<div>
+    <mat-table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="employee">
+            <mat-header-cell *matHeaderCellDef> Empleado </mat-header-cell>
+            <mat-cell *matCellDef="let stamp"> {{(employee(stamp.employeeId) | async)?.name }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="workIn">
+            <mat-header-cell *matHeaderCellDef> Entrada </mat-header-cell>
+            <mat-cell *matCellDef="let stamp"> {{stamp.workIn | date:'shortTime'}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="workOut">
+            <mat-header-cell *matHeaderCellDef> Salida </mat-header-cell>
+            <mat-cell *matCellDef="let stamp"> {{stamp.workOut | date:'shortTime'}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row #rowRef *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+</div>
