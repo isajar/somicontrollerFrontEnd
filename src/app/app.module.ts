@@ -12,7 +12,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { MatCardModule,
+import {
+  MatCardModule,
   MatTableModule,
   MatSidenavModule,
   MatListModule,
@@ -20,14 +21,14 @@ import { MatCardModule,
   MatFormFieldModule,
   MatInputModule,
   MatDialogModule,
-  } from "@angular/material";
+  } from '@angular/material';
 
 
 // COMPONENTS
 import { HomeComponent } from './home/home.component';
-import { StampComponent } from './stamp/stamp.component';
 import { FormsModule } from '@angular/forms';
 import { StampDialogComponent } from './stamp-dialog/stamp-dialog.component';
+import { ReportComponent } from './report/report.component';
 
 
 
@@ -36,8 +37,8 @@ import { StampDialogComponent } from './stamp-dialog/stamp-dialog.component';
   declarations: [
     AppComponent,
     HomeComponent,
-    StampComponent,
     StampDialogComponent,
+    ReportComponent,
   ],
   imports: [
     AppRoutingModule,

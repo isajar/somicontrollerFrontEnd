@@ -1,22 +1,21 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {HomeComponent} from './home/home.component';
-import { StampComponent } from "./stamp/stamp.component";
+import { ReportComponent } from './report/report.component';
 
 
 const routes: Routes = [
     {
-        path: "",
+        path: '',
         component: HomeComponent
 
     },
     {
-        path: "stamps",
-        component: StampComponent
-
+      path: 'reports',
+      component: ReportComponent
     },
     {
-        path: "**",
+        path: '**',
         redirectTo: '/'
     }
 ];
