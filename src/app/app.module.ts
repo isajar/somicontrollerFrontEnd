@@ -1,3 +1,5 @@
+// ANGULAR
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -26,7 +28,6 @@ import {
 
 // COMPONENTS
 import { HomeComponent } from './home/home.component';
-import { FormsModule } from '@angular/forms';
 import { StampDialogComponent } from './stamp-dialog/stamp-dialog.component';
 import { ReportComponent } from './report/report.component';
 import { EmployeeComponent } from './employee/employee.component';
@@ -60,7 +61,8 @@ import { EmployeeDialogComponent } from './employee-dialog/employee-dialog.compo
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    MatDialogModule,
+    ReactiveFormsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],

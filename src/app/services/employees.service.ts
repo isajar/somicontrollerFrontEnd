@@ -38,6 +38,11 @@ export class EmployeesService {
     );
   }
 
+  postEmployee( employee: Employee ) {
+    this.http.post<Employee>('http://localhost:3000/api/employees', employee)
+                .subscribe(console.log);
+  }
+
 
 
 }
