@@ -29,6 +29,8 @@ import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
 import { StampDialogComponent } from './stamp-dialog/stamp-dialog.component';
 import { ReportComponent } from './report/report.component';
+import { EmployeeComponent } from './employee/employee.component';
+import { EmployeeDialogComponent } from './employee-dialog/employee-dialog.component';
 
 
 
@@ -39,6 +41,8 @@ import { ReportComponent } from './report/report.component';
     HomeComponent,
     StampDialogComponent,
     ReportComponent,
+    EmployeeComponent,
+    EmployeeDialogComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -60,6 +64,6 @@ import { ReportComponent } from './report/report.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [StampDialogComponent]
+  entryComponents: [StampDialogComponent, EmployeeDialogComponent]
 })
 export class AppModule { }
