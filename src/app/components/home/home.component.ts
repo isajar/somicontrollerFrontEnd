@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { StampDialogComponent } from '../stamp-dialog/stamp-dialog.component';
 import { Observable } from 'rxjs';
-import { Stamp } from '../models/stamp';
-import { StampsService } from '../services/stamps.service';
 import { DataSource } from '@angular/cdk/collections';
-import { Employee } from '../models/employee';
-import { EmployeesService } from '../services/employees.service';
+import { Employee } from 'src/app/models/employee';
+import { StampsService } from 'src/app/services/stamps.service';
+import { EmployeesService } from 'src/app/services/employees.service';
+import { StampDialogComponent } from '../dialogs/stamp-dialog/stamp-dialog.component';
+import { Stamp } from 'src/app/models/stamp';
+
 
 @Component({
   selector: 'app-home',

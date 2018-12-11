@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap, catchError } from 'rxjs/operators';
 import { Employee } from '../models/employee';
 
 
@@ -39,9 +39,18 @@ export class EmployeesService {
   }
 
   postEmployee( employee: Employee ) {
-    this.http.post<Employee>('http://localhost:3000/api/employees', employee)
-                .subscribe(console.log);
+    return this.http.post<Employee>('http://localhost:3000/api/employees', employee)
+                      .pipe( tap( res => this.pushNewEmployee(res) ) );
+
   }
+
+  pushNewEmployee( newEmployee: Employee) {
+    const employees = this.subject.getValue();
+    employees.push(newEmployee);
+    this.subject.next(employees);
+  }
+
+
 
 
 

@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
-import { EmployeesService } from '../services/employees.service';
-import { StampsService } from '../services/stamps.service';
+import { EmployeesService } from 'src/app/services/employees.service';
+import { StampsService } from 'src/app/services/stamps.service';
 
 @Component({
   selector: 'app-stamp-dialog',

@@ -1,6 +1,7 @@
 // ANGULAR
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -9,29 +10,19 @@ import { AppComponent } from './app.component';
 // ROUTING
 import {AppRoutingModule} from './app-routing.module';
 
+
 // ANGULAR MATERIAL
-import {MatIconModule} from '@angular/material/icon';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatButtonModule} from '@angular/material/button'
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {
-  MatCardModule,
-  MatTableModule,
-  MatSidenavModule,
-  MatListModule,
-  MatToolbarModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatDialogModule,
-  } from '@angular/material';
+import { MaterialModule } from './modules /material.module';
+
 
 
 // COMPONENTS
-import { HomeComponent } from './home/home.component';
-import { StampDialogComponent } from './stamp-dialog/stamp-dialog.component';
-import { ReportComponent } from './report/report.component';
-import { EmployeeComponent } from './employee/employee.component';
-import { EmployeeDialogComponent } from './employee-dialog/employee-dialog.component';
+import { HomeComponent } from './components/home/home.component';
+import { StampDialogComponent } from './components/dialogs/stamp-dialog/stamp-dialog.component';
+import { ReportComponent } from './components/report/report.component';
+import { EmployeeComponent } from './components/employee/employee.component';
+import { EmployeeDialogComponent } from './components/dialogs/employee-dialog/employee-dialog.component';
+
 
 
 
@@ -49,20 +40,10 @@ import { EmployeeDialogComponent } from './employee-dialog/employee-dialog.compo
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
-    MatCardModule,
-    MatButtonModule,
-    MatTableModule,
     HttpClientModule,
-    MatSidenavModule,
-    MatListModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatMenuModule,
-    MatFormFieldModule,
-    MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

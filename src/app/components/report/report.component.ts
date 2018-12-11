@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ReportsService } from '../services/reports.service';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable} from 'rxjs';
-import { Stamp } from '../models/stamp';
+import { ReportsService } from 'src/app/services/reports.service';
+import { Stamp } from 'src/app/models/stamp';
+
 
 @Component({
   selector: 'app-report',

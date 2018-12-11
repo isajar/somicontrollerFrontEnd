@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { EmployeesService } from '../services/employees.service';
 import { DataSource } from '@angular/cdk/collections';
-import { Employee } from '../models/employee';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material';
-import { EmployeeDialogComponent } from '../employee-dialog/employee-dialog.component';
+import { EmployeesService } from 'src/app/services/employees.service';
+import { EmployeeDialogComponent } from '../dialogs/employee-dialog/employee-dialog.component';
+import { Employee } from 'src/app/models/employee';
+
 
 @Component({
   selector: 'app-employee',
