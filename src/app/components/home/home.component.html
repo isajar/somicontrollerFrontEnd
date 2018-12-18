@@ -6,7 +6,11 @@
 
         <ng-container matColumnDef="employee">
             <mat-header-cell *matHeaderCellDef> Empleado </mat-header-cell>
-            <mat-cell *matCellDef="let stamp"> {{(employee(stamp.employeeId) | async)?.name }} </mat-cell>
+            <mat-cell *matCellDef="let stamp">
+                <span *ngIf="stamp.employeeId | join | async as employee">
+                {{ employee.name }}
+              </span>
+            </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="workIn">

@@ -22,6 +22,7 @@ import { StampDialogComponent } from './components/dialogs/stamp-dialog/stamp-di
 import { ReportComponent } from './components/report/report.component';
 import { EmployeeComponent } from './components/employee/employee.component';
 import { EmployeeDialogComponent } from './components/dialogs/employee-dialog/employee-dialog.component';
+import { JoinPipe } from './pipes/join.pipe';
 
 
 
@@ -35,6 +36,7 @@ import { EmployeeDialogComponent } from './components/dialogs/employee-dialog/em
     ReportComponent,
     EmployeeComponent,
     EmployeeDialogComponent,
+    JoinPipe,
   ],
   imports: [
     AppRoutingModule,

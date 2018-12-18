@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { map, tap, filter } from 'rxjs/operators';
+import { Observable, BehaviorSubject, EmptyError } from 'rxjs';
+import { map, tap, filter, isEmpty, defaultIfEmpty, first } from 'rxjs/operators';
 import { Employee } from '../models/employee';
 import { environment } from '../../environments/environment';
 
@@ -34,11 +34,19 @@ export class EmployeesService {
  * @returns an observable with the found employee
  */
   findByDni( dni: string ) {
-    return this.employees$.pipe(
-      map( employees => employees
-        .find( employee => employee.dni === dni)),
-        // filter undefined employee do to the initial (empty) value of the subject
-        filter( employee => !!employee )
+    return this.employees$
+    .pipe(
+      filter( employee => !!employee ),
+      // filter undefined employee do to the initial (empty) value of the subject
+      map( employees => {
+        const result = employees.find( employee => employee.dni === dni);
+        if ( !result ) {
+          throw new Error('Invalid DNI');
+        } else {
+          return result;
+        }
+      }),
+      first()
     );
   }
 // ------------------------------------------------------------------------------------------------------------------
@@ -48,11 +56,12 @@ export class EmployeesService {
  * @returns an observable with the found employee
  */
   findById( id: string) {
-    return this.employees$.pipe(
-      map( employees => employees
-        .find( employee => employee._id === id)),
-        // filter undefined employee do to the initial (empty) value of the subject
-        filter( employee => !!employee )
+    return this.employees$
+    .pipe(
+      // filter undefined employee do to the initial (empty) value of the subject
+      filter( employee => !!employee ),
+      map( employees => employees.find( employee => employee._id === id)),
+      first(),
     );
   }
 // ------------------------------------------------------------------------------------------------------------------

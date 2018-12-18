@@ -2,6 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { EmployeesService } from 'src/app/services/employees.service';
 import { StampsService } from 'src/app/services/stamps.service';
+import { concatMap, isEmpty, map } from 'rxjs/operators';
+import { noop } from 'rxjs';
 
 @Component({
   selector: 'app-stamp-dialog',
@@ -23,12 +25,18 @@ export class StampDialogComponent implements OnInit {
   }
 
   save() {
-    console.log(this.dni);
-    this.employeeService.findByDni(this.dni).subscribe(
-      employee => this.stampService.saveStamp(employee._id),
-      () => console.log('error buscando empleado con ese dni')
+    const employee$ = this.employeeService.findByDni(this.dni);
+
+    employee$.pipe(
+      concatMap( employee => this.stampService.saveStamp(employee._id))
+    ).subscribe(
+      noop,
+      error => console.error(error.message)
     );
+
+    this.dialogRef.close();
   }
+
 
   close() {
     this.dialogRef.close();

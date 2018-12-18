@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Stamp } from '../models/stamp';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -18,53 +19,69 @@ export class StampsService {
   constructor(private http: HttpClient) {
     console.log('entre al servicio stamps');
   }
-
+/**
+ * @description get all the stamps (current month but has to be current day) from the db and share replay to the observables
+ */
   init() {
     const month = new Date().getMonth();
     this.http.get<Stamp[]>(`http://localhost:3000/api/stamps?month=${month}`)
               .subscribe(stamps => this.subject.next(stamps));
   }
-
-  saveStamp(employeeId: string) {
+// ------------------------------------------------------------------------------------------------------------------
+/**
+ * @description post a new stanp to the db execute http post
+ * @param employeeId an employeeId corresponding to the employee's stamp
+ * @returns an observable of the server response
+ */
+  postStamp( employeeId: string ) {
+    return this.http.post<Stamp>(`${environment.apiUrl}/stamps/`, { employeeId })
+                    .pipe( tap( res => this.updateInSubject( res ) ) );
+  }
+// ------------------------------------------------------------------------------------------------------------------
+/**
+ * @description put a stamp to the db execute http put
+ * @param stamp a stamp object
+ * @returns an observable of the server response
+ */
+  putStamp( stamp: Stamp ) {
+    return this.http.put<Stamp>(`${environment.apiUrl}/stamps/${stamp._id}`, stamp)
+                    .pipe( tap( res => this.updateInSubject( res ) ) );
+  }
+// ------------------------------------------------------------------------------------------------------------------
+/**
+ * @description wrapper to decide if updating or creating a stamp
+ * @param employeeId Id of the employee's stamp
+ * @returns an observable of the server response
+ */
+  saveStamp ( employeeId: string ) {
+    // if _id is present -> edit else create
     const stamps = this.subject.getValue();
     const activeStamp = stamps.find( stamp => (stamp.employeeId === employeeId && !stamp.workOut ));
-    // if there is an active stamp for the employee => update
-    if ( activeStamp ) {
-       const stampIndex = stamps.findIndex( stamp => stamp._id === activeStamp._id );
-       const newStamps = stamps.slice(0);
-       const stampToUpdate = {
-        ...stamps[stampIndex],
-        workOut: new Date()
-      };
-       this.putStamp(stampToUpdate, stampToUpdate._id ).subscribe(
-         updatedStamp => {
-           newStamps[stampIndex] = updatedStamp;
-           this.subject.next(newStamps);
-         });
-    } else {
-    // if does not exist any active stamp for the employee => create one
-      const now = new Date();
-      this.postStamp({
-        employeeId,
-        month: now.getMonth(),
-        workIn: now
-      }).subscribe(
-        newStamp => {
-          stamps.push(newStamp);
-          this.subject.next(stamps);
-        }
-      );
+    return activeStamp ? this.putStamp( activeStamp ) : this.postStamp( employeeId );
+  }
+// ------------------------------------------------------------------------------------------------------------------
+/**
+ * @description update the subject after updating the db -> this update the UI to reflect the db changes
+ * @param newEmployee an object to update the subject
+ */
+  updateInSubject( newStamp: Stamp ) {
+    // come from edit or create
+    const stamps = this.subject.getValue();
+    const updatedStamps = stamps.slice(0);
+
+    let index = stamps.findIndex( stamp => stamp._id === newStamp._id );
+
+    if ( index === -1 ) {
+      index = stamps.length;
     }
+
+    updatedStamps[index] = {
+      ...stamps[index],
+      ...newStamp
+    };
+
+    this.subject.next( updatedStamps );
+
   }
-
-  postStamp( stamp: Stamp ) {
-    return this.http.post<Stamp>('http://localhost:3000/api/stamps', stamp);
-  }
-
-  putStamp( stamp: Stamp,  stampId: string  ) {
-    return this.http.put<Stamp>(`http://localhost:3000/api/stamps/${stampId}`, stamp);
-  }
-
-
 
 }
